@@ -26,7 +26,7 @@ args = parser.parse_args()
 
 # Fixed hyperparameters
 EMBED_DIM = 128
-DATA_DIR = "F:/cuda-environment/AIFB/processed"
+DATA_DIR = "./AIFB/processed"
 LEARNING_RATE = 0.01
 BATCH_SIZE = 512
 VAL_EVERY = 5000
