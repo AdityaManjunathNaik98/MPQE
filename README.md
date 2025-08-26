@@ -17,8 +17,12 @@ git clone https://github.com/AdityaManjunathNaik98/MPQE.git
 cd MPQE
 `
 
+`
+cd mpqe
+`
+
 3. Run the code
 
 `
-python mpqe.pipeline --max_iter=50000 --max_burn_in=45000 --num_layers=5
+python pipeline.py --max_iter=50000 --max_burn_in=45000 --num_layers=5
 `
