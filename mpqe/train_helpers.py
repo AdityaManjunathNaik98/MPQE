@@ -131,7 +131,7 @@ def run_train(model, optimizer, train_queries, val_queries, test_queries,
             else:
                 vals.append(v["1-chain"])
     
-    v = run_eval(model, test_queries, i, logger)
+    v = run_eval(model, test_queries, i, logger, by_type=False)
     test_avg_auc = np.mean(list(v.values()))
     logger.info("Test macro-averaged val: {:f}".format(test_avg_auc))
     _run.log_scalar('test_auc', test_avg_auc)

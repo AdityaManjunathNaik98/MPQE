@@ -10,6 +10,10 @@ import pickle as pickle
 import logging
 import random
 
+
+import warnings
+warnings.filterwarnings("ignore")
+
 """
 Misc utility functions..
 """

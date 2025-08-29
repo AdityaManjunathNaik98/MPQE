@@ -18,7 +18,7 @@ from sacred.observers import MongoObserver
 
 # Configuration - only essential arguments
 parser = ArgumentParser()
-parser.add_argument("--model", type=str, default="qrgcn", help="Model type: qrgcn or gqe")
+parser.add_argument("--model", type=str, default="gqe", help="Model type: qrgcn or gqe")
 parser.add_argument("--max_iter", type=int, default=10000000, help="Maximum training iterations")
 parser.add_argument("--max_burn_in", type=int, default=1000000, help="Maximum burn-in iterations")
 parser.add_argument("--num_layers", type=int, default=2, help="Number of model layers")
@@ -26,7 +26,7 @@ args = parser.parse_args()
 
 # Fixed hyperparameters
 EMBED_DIM = 128
-DATA_DIR = "F:/cuda-environment/AIFB/processed"
+DATA_DIR = "F:/cuda-environment/data"
 LEARNING_RATE = 0.01
 BATCH_SIZE = 512
 VAL_EVERY = 5000
@@ -185,27 +185,12 @@ def main(data_dir, _run):
 
     print("Training completed!")
 
-    # Export embeddings for downstream tasks
-    entity_ids_path = osp.join(data_dir, 'entity_ids.pkl')
-    if osp.exists(entity_ids_path):
-        print("Exporting embeddings...")
-        entity_ids = pkl.load(open(entity_ids_path, 'rb'))
-        embeddings = np.zeros((len(entity_ids), 1 + EMBED_DIM))
-
-        for i, ent_id in enumerate(entity_ids.values()):
-            for mode in enc_dec.graph.full_sets:
-                if ent_id in enc_dec.graph.full_sets[mode]:
-                    embeddings[i, 0] = ent_id
-                    id_tensor = torch.tensor([ent_id])
-                    emb = enc_dec.enc(id_tensor, mode).detach().cpu().numpy()
-                    embeddings[i, 1:] = emb.reshape(-1)
-
-        file_path = osp.join(folder_path, 'embeddings.npy')
-        np.save(file_path, embeddings)
-        print(f'Saved embeddings at {file_path}')
-    else:
-        print('Did not find entity_ids dictionary. Files found:')
-        print(os.listdir(data_dir))
+    # Save model's training vocabulary
+    print("Saving model vocabulary...")
+    vocab_path = osp.join(folder_path, 'training_vocabulary.pkl')
+    with open(vocab_path, 'wb') as f:
+        pkl.dump(enc_dec.graph.full_sets, f)
+    print(f'Saved training vocabulary at {vocab_path}')
 
 #------------------------------
 # EXECUTION
