@@ -17,10 +17,6 @@ git clone https://github.com/AdityaManjunathNaik98/MPQE.git
 cd MPQE
 `
 
-`
-cd mpqe
-`
-
 3. Run the code
 
 `
