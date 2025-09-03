@@ -3,9 +3,9 @@ import scipy
 import scipy.stats as stats
 import torch
 from sklearn.metrics import roc_auc_score
-from decoders import BilinearMetapathDecoder, TransEMetapathDecoder, BilinearDiagMetapathDecoder, SetIntersection, SimpleSetIntersection
-from encoders import DirectEncoder, Encoder
-from aggregators import MeanAggregator
+from .decoders import BilinearMetapathDecoder, TransEMetapathDecoder, BilinearDiagMetapathDecoder, SetIntersection, SimpleSetIntersection
+from .encoders import DirectEncoder, Encoder
+from .aggregators import MeanAggregator
 import pickle as pickle
 import logging
 import random

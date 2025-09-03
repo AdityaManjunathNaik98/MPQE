@@ -4,7 +4,7 @@ from multiprocessing import Process
 from collections import Counter
 from multiprocessing import cpu_count
 from torch.utils.data import Dataset, DataLoader
-from graph import _reverse_relation
+from .graph import _reverse_relation
 import numpy as np
 from torch_geometric.data import Data, Batch
 import torch
@@ -12,7 +12,7 @@ import os.path as osp
 import random
 import os
 
-from graph import Graph, Query, _reverse_edge
+from .graph import Graph, Query, _reverse_edge
 
 
 def load_graph(data_dir, embed_dim):
